@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\Card\TestInformation\testimage.png" />
+    <None Remove="Resource\Card\Vitebsk\image.png" />
+    <None Remove="Resource\Images\belarus-map.jpg" />
+    <None Remove="Resource\Images\ccc.jpg" />
+    <None Remove="Resource\Items\chain.png" />
+    <None Remove="Resource\Items\lock.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\Models\" />
+    <Folder Include="Resource\Icon\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Card\TestInformation\testimage.png" />
+    <Resource Include="Resource\Card\Vitebsk\image.png" />
+    <Resource Include="Resource\Images\belarus-map.jpg" />
+    <Resource Include="Resource\Images\ccc.jpg" />
+    <Resource Include="Resource\Items\chain.png" />
+    <Resource Include="Resource\Items\lock.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resource\Card\TestInformation\testvideo.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

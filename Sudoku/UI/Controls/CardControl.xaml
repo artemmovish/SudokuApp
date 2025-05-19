@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Sudoku.UI.Controls.CardControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Background="#FF1E1E1E"
+             MaxWidth="880" MaxHeight="700">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF3E3E3E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Основной контент -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопки переключения -->
+            <RowDefinition Height="0.5*"/>
+            <!-- Текстовая информация -->
+        </Grid.RowDefinitions>
+
+        <!-- Контейнер для медиа-контента -->
+        <Grid Grid.Row="0">
+            <!-- Изображение (видимо, когда выбран режим фото) -->
+            <Image x:Name="ContentImage"
+                   Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                   Stretch="Uniform"
+                   MaxHeight="550"
+                   MaxWidth="880"
+                   Visibility="Collapsed"/>
+
+            <!-- Видео (видимо, когда выбран режим видео) -->
+            <MediaElement x:Name="ContentVideo"
+                         Source="{Binding VideoSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                         Stretch="Uniform"
+                         MaxHeight="550"
+                         MaxWidth="880"
+                         HorizontalAlignment="Center"
+                         Visibility="Collapsed"
+                         LoadedBehavior="Manual"/>
+        </Grid>
+
+        <!-- Панель переключения режимов -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button Content="Показать фото" Click="ShowImage_Click" Width="120"/>
+            <Button Content="Показать видео" Click="ShowVideo_Click" Width="120"/>
+            <Button x:Name="PlayPauseButton" Content="Воспроизвести" Click="TogglePlayPause_Click" Width="120"/>
+        </StackPanel>
+
+        <!-- Текстовая информация -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10">
+            <StackPanel>
+                <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           TextAlignment="Center"
+                         FontSize="18"
+                         FontWeight="Bold"
+                         TextWrapping="Wrap"
+                         Margin="0,0,0,10"/>
+
+                <TextBlock Text="{Binding Information, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                         FontSize="14"
+                         TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
