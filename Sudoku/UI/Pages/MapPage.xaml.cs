@@ -28,7 +28,6 @@ namespace Sudoku.UI.Pages
         {
             InitializeComponent();
             LastLevel = null;
-            MogilevLevel.LockCount = 5;
         }
 
         private void ToBackBtn_Click(object sender, RoutedEventArgs e)
@@ -36,9 +35,9 @@ namespace Sudoku.UI.Pages
             NavigationService?.GoBack();
         }
 
-        private void VitebskCard_Click(object sender, RoutedEventArgs e)
+        private void CardClose_Click(object sender, RoutedEventArgs e)
         {
-            Panel.SetZIndex(VitebskCard, 0);
+            Panel.SetZIndex((UIElement)sender, 0);
         }
 
         private bool _isAnimating = false;
@@ -108,7 +107,7 @@ namespace Sudoku.UI.Pages
                     switch (name)
                     {
                         case "VitebskLevel":
-                            ChangeVisivleCard(VitebskCard);
+                            ChangeVisivleCard(VitebskCard_IronGift);
                             break;
                         
                         default:

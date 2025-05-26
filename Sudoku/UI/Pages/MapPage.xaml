@@ -16,41 +16,75 @@
     </Page.Resources>
 
     <Grid>
-        <controls:CardControl Panel.ZIndex="0" x:Name="VitebskCard" Click="VitebskCard_Click"
+        <controls:CardControl Panel.ZIndex="0" x:Name="VitebskCard_IronGift" Click="VitebskCard_Click"
                               ImageSource="/Resource/Card/Vitebsk/image.jpg"
                               VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
                               Title="Железнодорожный вокзал станции Витебск"
                               Information="Железнодорожный вокзал станции Витебск расположен в одноименном городе на Привокзальной площади. Адрес — улица Космонавтов, 8.
 Нынешнее здание вокзала построено в 1952 году. Архитектор — Борис Мезенцев. Двухэтажное здание в стиле советского неоклассицизма. Он состоит из прямоугольного центрального и двух боковых объёмов. Главный фасад центрального здания отличается тремя широкими арочными оконными проемами и украшен коринфскими колоннами, лепными прямоугольными нишами, барельефами. Посередине главного фасада установлены часы."/>
+        <controls:CardControl Panel.ZIndex="0" x:Name="VitebskCard_Theatre" Click="VitebskCard_Click"
+                              ImageSource="/Resource/Card/Vitebsk/image.jpg"
+                              VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
+                              Title="театр якуба колоса"
+                              Information="театр якуба колоса"/>
+        <controls:CardControl Panel.ZIndex="0" x:Name="MogilevCard_Theatre" Click="VitebskCard_Click"
+      ImageSource="/Resource/Card/Vitebsk/image.jpg"
+      VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
+      Title="городской театр"
+      Information="городской театр"/>
+        <controls:CardControl Panel.ZIndex="0" x:Name="MogilevCard_IronGift" Click="VitebskCard_Click"
+      ImageSource="/Resource/Card/Vitebsk/image.jpg"
+      VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
+      Title="жд вокзал"
+      Information="жд вокзал"/>
+        <controls:CardControl Panel.ZIndex="0" x:Name="GomelCard_Home" Click="VitebskCard_Click"
+ImageSource="/Resource/Card/Vitebsk/image.jpg"
+VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
+Title="Дом врача Александрова"
+Information="Дом врача Александрова"/>
+        <controls:CardControl Panel.ZIndex="0" x:Name="GomelCard_Bank" Click="CardClose_Click"
+ImageSource="/Resource/Card/Vitebsk/image.jpg"
+VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
+Title="орловский коммерческий банк"
+Information="орловский коммерческий банк"/>
         <!-- Фон карты Беларуси -->
         <Image Source="/Resource/Images/belarus-map.jpg"
                Margin="-130"
                Stretch="Uniform"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
-
         <!-- Контейнер для уровней (UserControl) -->
         <Canvas x:Name="LevelsContainer">
-            <!-- Уровень 1: Минск -->
-            <controls:LevelControl x:Name="VitebskLevel"  Click="Level_Click"
+            <controls:LevelControl x:Name="VitebskLevel_IronGift"  Click="Level_Click"
                                    LockCount="1"
                                    TaskType="Sudoku"
                                    Canvas.Left="557"
                                    Canvas.Top="132"/>
+            <controls:LevelControl x:Name="VitebskLevel_Theatre"  Click="Level_Click"
+           LockCount="1"
+           TaskType="Sudoku"
+           Canvas.Left="409"
+           Canvas.Top="167"/>
 
-            <!-- Уровень 2: Брест -->
-            <controls:LevelControl x:Name="GomelLevel" Click="Level_Click"
-                                   LockCount="2"
-                                   TaskType="Sudoku"
-                                   Canvas.Left="585"
-                                   Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
-            <!-- Уровень 3: Гродно -->
-            <controls:LevelControl x:Name="MogilevLevel"  Click="Level_Click"
+            <controls:LevelControl x:Name="MogilevLevel_Theatre"  Click="Level_Click"
                                   Canvas.Left="585"
                                   Canvas.Top="300" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        </Canvas>
+            <controls:LevelControl x:Name="MogilevLevel_IronGif"  Click="Level_Click"
+                      Canvas.Left="512"
+                      Canvas.Top="350" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+            <controls:LevelControl x:Name="GomelLevel_Home" Click="Level_Click"
+                       LockCount="2"
+                       TaskType="Sudoku"
+                       Canvas.Left="585"
+                       Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <controls:LevelControl x:Name="GomelLevel_Bank" Click="Level_Click"
+           LockCount="2"
+           TaskType="Sudoku"
+           Canvas.Left="479"
+           Canvas.Top="511" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        </Canvas>
         <!-- Панель информации (справа) -->
         <Border Width="250"
                 Height="300"
@@ -76,7 +110,6 @@
                            TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
-
         <!-- Кнопка "Назад" -->
         <Button Content="Назад" x:Name="ToBackBtn"
                 Click="ToBackBtn_Click"
