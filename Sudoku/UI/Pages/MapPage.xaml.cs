@@ -22,9 +22,13 @@ namespace Sudoku.UI.Pages
     /// </summary>
     public partial class MapPage : Page
     {
+        public LevelControl? LastLevel { get; set; }
+
         public MapPage()
         {
             InitializeComponent();
+            LastLevel = null;
+            MogilevLevel.LockCount = 5;
         }
 
         private void ToBackBtn_Click(object sender, RoutedEventArgs e)
@@ -49,7 +53,16 @@ namespace Sudoku.UI.Pages
 
             try
             {
-                await ChangeSize((LevelControl)sender, _cts.Token);
+                var ctr = (LevelControl)sender;
+
+                if (LastLevel != null && LastLevel.Width >= 200 
+                    && LastLevel != ctr)
+                {
+                    await ChangeSize(LastLevel, _cts.Token);
+                }
+
+                await ChangeSize(ctr, _cts.Token);
+                LastLevel = ctr;
             }
             catch (OperationCanceledException)
             {
@@ -86,6 +99,22 @@ namespace Sudoku.UI.Pages
 
                     await Task.Delay(16, cancellationToken); // ~60 FPS
                 }
+                ctr.SetVisibleLockPanel(Visibility.Visible);
+
+                if (ctr.IsComplete)
+                {
+                    string name = ctr.Name;
+
+                    switch (name)
+                    {
+                        case "VitebskLevel":
+                            ChangeVisivleCard(VitebskCard);
+                            break;
+                        
+                        default:
+                            break;
+                    }
+                }
             }
             else
             {
@@ -102,9 +131,15 @@ namespace Sudoku.UI.Pages
                     Canvas.SetLeft(ctr, initialLeft + (startWith - ctr.Width) / 2);
                     Canvas.SetTop(ctr, initialTop + (startHeight - ctr.Height) / 2);
 
-                    await Task.Delay(16, cancellationToken); // ~60 FPS
+                    await Task.Delay(32, cancellationToken); // ~30 FPS
                 }
+                ctr.SetVisibleLockPanel(Visibility.Collapsed);
             }
+        }
+
+        private void ChangeVisivleCard(CardControl ctr)
+        {
+            Panel.SetZIndex(ctr, 3);
         }
     }
 }

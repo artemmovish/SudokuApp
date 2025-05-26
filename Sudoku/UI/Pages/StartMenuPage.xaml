@@ -51,6 +51,7 @@
                     FontSize="16"
                     Background="#FF3A3A3A"
                     Foreground="White"
+                    Click="ResetBtn_Click"
                     BorderBrush="#FF555555"/>
         </StackPanel>
     </Grid>

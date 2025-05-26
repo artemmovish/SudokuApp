@@ -33,15 +33,17 @@
         <Canvas x:Name="LevelsContainer">
             <!-- Уровень 1: Минск -->
             <controls:LevelControl x:Name="VitebskLevel"  Click="Level_Click"
-                                  Canvas.Left="557"
-                                  Canvas.Top="132"/>
+                                   LockCount="1"
+                                   TaskType="Sudoku"
+                                   Canvas.Left="557"
+                                   Canvas.Top="132"/>
 
             <!-- Уровень 2: Брест -->
-            <controls:LevelControl x:Name="MinskLevel" Click="Level_Click"
+            <controls:LevelControl x:Name="GomelLevel" Click="Level_Click"
                                    LockCount="2"
                                    TaskType="Sudoku"
-                                   Canvas.Left="386"
-                                   Canvas.Top="300" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                   Canvas.Left="585"
+                                   Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
             <!-- Уровень 3: Гродно -->
             <controls:LevelControl x:Name="MogilevLevel"  Click="Level_Click"

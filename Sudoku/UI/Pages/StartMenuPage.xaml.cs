@@ -24,6 +24,7 @@ namespace Sudoku.UI.Pages
         public StartMenuPage()
         {
             InitializeComponent();
+
         }
 
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
@@ -34,6 +35,11 @@ namespace Sudoku.UI.Pages
         private void SettingBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(PageStorage.Instance.SettingsPage);
+        }
+
+        private void ResetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageStorage.Instance.MapPage = new MapPage();
         }
     }
 }

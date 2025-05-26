@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sudoku.Core.ViewModels.SinglTone;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,8 @@ namespace Sudoku.UI.Pages
 
         private void ToBackBtn_Click(object sender, RoutedEventArgs e)
         {
+            var dif = (int)DifficultySlider.Value;
+            PageStorage.Instance.Difficulty = (int) (50.0 / 100 * dif);
             NavigationService?.GoBack();
         }
     }

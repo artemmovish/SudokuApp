@@ -14,6 +14,8 @@ namespace Sudoku.Core.ViewModels.SinglTone
         public MapPage MapPage { get; set; }
         public SettingsPage SettingsPage { get; set; }
 
+        public int Difficulty { get; set; }
+
         public static PageStorage Instance
         {
             get
@@ -29,6 +31,7 @@ namespace Sudoku.Core.ViewModels.SinglTone
         private PageStorage()
         {
             MapPage = new MapPage();
+            Difficulty = 50;
             SettingsPage = new SettingsPage();
         }
     }

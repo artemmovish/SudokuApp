@@ -16,41 +16,54 @@
         <!-- Title -->
         <TextBlock Grid.Row="0" Text="Судоку" 
                    HorizontalAlignment="Center" 
-                   FontSize="24" FontWeight="Bold" 
-                   Foreground="White" Margin="0,20"/>
+                   FontSize="32" FontWeight="Bold" 
+                   Foreground="#FF4FC3F7" Margin="0,20"
+                   FontFamily="Arial"/>
 
         <!-- Sudoku Board -->
-        <ItemsControl Grid.Row="1" x:Name="SudokuBoard" 
-                      HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="9" Columns="9" Background="Black"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="White" BorderThickness="0.5" 
-                            Background="{Binding Background}">
-                        <TextBox Text="{Binding Value, Mode=TwoWay}" 
-                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                 FontSize="20" Foreground="{Binding TextColor}"
-                                 IsReadOnly="{Binding IsFixed}" Background="Transparent"
-                                 BorderThickness="0"/>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Border Grid.Row="1" BorderBrush="#FF4FC3F7" BorderThickness="2" 
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                CornerRadius="4" Padding="2" Background="#FF4FC3F7">
+            <ItemsControl x:Name="SudokuBoard">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="9" Columns="9" Background="Black"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#FF4FC3F7" BorderThickness="{Binding BorderThickness}" 
+                                Background="{Binding Background}" CornerRadius="1" Margin="5">
+                            <TextBox Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                     FontSize="24" Foreground="{Binding TextColor}" FontWeight="Bold"
+                                     IsReadOnly="{Binding IsFixed}" Background="Transparent"
+                                     BorderThickness="0" MaxLength="1"
+                                     PreviewTextInput="TextBox_PreviewTextInput">
+                                <TextBox.InputBindings>
+                                    <KeyBinding Key="Backspace" Command="{Binding ClearCommand}"/>
+                                </TextBox.InputBindings>
+                            </TextBox>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
 
         <!-- Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" 
                     HorizontalAlignment="Center" Margin="0,20">
             <Button x:Name="RegenerateButton" Content="Сгенерировать заново" 
-                    Width="120" Height="40" Margin="10,0" 
-                    Click="RegenerateButton_Click"/>
+                    Width="160" Height="40" Margin="10,0" 
+                    Click="RegenerateButton_Click"
+                    Background="#FF4FC3F7" Foreground="White" FontWeight="Bold"
+                    BorderBrush="#FF0288D1" BorderThickness="1"/>
             <Button x:Name="CheckButton" Content="Проверить решение" 
-                    Width="120" Height="40" Margin="10,0" 
-                    Click="CheckButton_Click"/>
+                    Width="160" Height="40" Margin="10,0" 
+                    Click="CheckButton_Click"
+                    Background="#FF4FC3F7" Foreground="White" FontWeight="Bold"
+                    BorderBrush="#FF0288D1" BorderThickness="1"/>
         </StackPanel>
     </Grid>
 </Window>
