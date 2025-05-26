@@ -15,7 +15,7 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <!-- Заголовок игры -->
-            <TextBlock Text="СУДОКУ" 
+            <TextBlock Text="SUDOKU" 
                        FontSize="48" 
                        FontWeight="Bold" 
                        Foreground="White"
