@@ -6,6 +6,8 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Sudoku.Core.ViewModels.SinglTone;
+using Sudoku.Core.Enums;
 
 namespace Sudoku.UI.Controls
 {
@@ -18,6 +20,10 @@ namespace Sudoku.UI.Controls
         public static readonly DependencyProperty LockCountProperty =
     DependencyProperty.Register("LockCount", typeof(int), typeof(LevelControl),
     new PropertyMetadata(0, OnLockCountChanged));
+
+        public static readonly DependencyProperty UnlockLevelCountProperty =
+            DependencyProperty.Register("UnlockLevelCount", typeof(int), typeof(LevelControl),
+                new PropertyMetadata(0, OnUnlockLevelCountChanged));
 
         public static readonly DependencyProperty TaskTypeProperty =
     DependencyProperty.Register("TaskType", typeof(string), typeof(LevelControl),
@@ -43,6 +49,12 @@ namespace Sudoku.UI.Controls
             set { SetValue(LockCountProperty, value); }
         }
 
+        public int UnlockLevelCount
+        {
+            get { return (int)GetValue(UnlockLevelCountProperty); }
+            set { SetValue(UnlockLevelCountProperty, value); }
+        }
+
         // Свойство для типа задания (можно заменить на нужный вам enum)
         public string TaskType
         {
@@ -55,10 +67,19 @@ namespace Sudoku.UI.Controls
             var control = d as LevelControl;
             control?.UpdateLocks();
         }
-
+        private static void OnUnlockLevelCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as LevelControl;
+        }
         private void UpdateLocks()
         {
             lockPanel.Children.Clear();
+
+            if (LockCount == 0)
+            {
+                Chain.Visibility = Visibility.Collapsed;
+                IsComplete = true;
+            }
 
             for (int i = 0; i < LockCount; i++)
             {
@@ -69,25 +90,57 @@ namespace Sudoku.UI.Controls
                     Cursor = Cursors.Hand
                 };
 
-                lockImage.MouseDown += async (sender, e) =>
-                {
-                    var clickedLock = (Image)sender;
-                    var window = new SudokuLevelWindow();
-
-                    if (window.ShowDialog() == true)
-                    {
-                        await AnimateLockFall(clickedLock);
-                        lockPanel.Children.Remove(clickedLock);
-                        LockCount--;
-                        if (LockCount < 1)
-                        {
-                            Chain.Visibility = Visibility.Collapsed;
-                            IsComplete = true;
-                        }
-                    }
-                };
-
+                lockImage.MouseDown += LockImage_MouseDown;
                 lockPanel.Children.Add(lockImage);
+            }
+        }
+
+        private async void LockImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var openLock = PageStorage.Instance.OpenLockCount;
+
+            if (UnlockLevelCount > openLock)
+            {
+                MessageBox.Show($"Недостаточное количество пройденых уровней.\n" +
+                    $"Пройдено уровней {openLock} из {UnlockLevelCount}");
+                return;
+            }
+
+            var clickedLock = (Image)sender;
+
+            if (TaskType == LevelTaskType.Sudoku.ToString())
+            {
+                var window = new SudokuLevelWindow();
+
+                if (window.ShowDialog() == true)
+                {
+                    LevelIsCompleted(clickedLock);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пока нет");
+            }
+            
+        }
+
+        private async void LevelIsCompleted(Image clickedLock)
+        {
+            await AnimateLockFall(clickedLock);
+            lockPanel.Children.Remove(clickedLock);
+            LockCount--;
+
+            PageStorage.Instance.OpenLockCount++;
+
+            var ctr = PageStorage.Instance.CompletedLevels.SingleOrDefault(l =>
+                l.Name == this.Name);
+
+            ctr.CountLock--;
+
+            if (LockCount < 1)
+            {
+                Chain.Visibility = Visibility.Collapsed;
+                IsComplete = true;
             }
         }
 

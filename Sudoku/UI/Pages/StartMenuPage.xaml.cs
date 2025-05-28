@@ -29,17 +29,34 @@ namespace Sudoku.UI.Pages
 
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(PageStorage.Instance.MapPage);
-        }
-
-        private void SettingBtn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(PageStorage.Instance.SettingsPage);
+            var page = PageStorage.Instance.MapPage;
+            page.LoadSave();
+            NavigationService?.Navigate(page);
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
+            PageStorage.ResetStorage();
             PageStorage.Instance.MapPage = new MapPage();
+
+            var page = PageStorage.Instance.MapPage;
+            page.LoadSave();
+            NavigationService?.Navigate(page);
+        }
+
+        private void ToSettingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(PageStorage.Instance.SettingsPage);
+        }
+
+        private void ToAboutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Не сделано");
+        }
+
+        private void ToBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow?.Close();
         }
     }
 }

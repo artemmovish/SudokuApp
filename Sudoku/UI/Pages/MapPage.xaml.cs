@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Sudoku.UI.Pages
 {
@@ -30,14 +31,53 @@ namespace Sudoku.UI.Pages
             LastLevel = null;
         }
 
+        public void LoadSave()
+        {
+            var list = PageStorage.Instance.CompletedLevels;
+
+            foreach (var item in list)
+            {
+                switch (item.Name)
+                {
+                    case "VitebskLevel_IronGift":
+                        VitebskLevel_IronGift.LockCount = item.CountLock;
+                        break;
+                    case "VitebskLevel_Theatre":
+                        VitebskLevel_Theatre.LockCount = item.CountLock;
+                        break;
+                    case "MogilevLevel_Theatre":
+                        MogilevLevel_Theatre.LockCount = item.CountLock;
+                        break;
+                    case "MogilevLevel_IronGift":
+                        MogilevLevel_IronGift.LockCount = item.CountLock;
+                        break;
+                    case "GomelLevel_Home":
+                        GomelLevel_Home.LockCount = item.CountLock;
+                        break;
+                    case "GomelLevel_Bank":
+                        GomelLevel_Bank.LockCount = item.CountLock;
+                        break;
+                    default:
+                        // Можно добавить логирование или обработку неизвестных уровней
+                        break;
+                }
+            }
+        }
+
         private void ToBackBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
         }
-
         private void CardClose_Click(object sender, RoutedEventArgs e)
         {
-            Panel.SetZIndex((UIElement)sender, 0);
+            var ctr = (UIElement)sender;
+            Panel.SetZIndex(ctr, 0);
+            ctr.Visibility = Visibility.Hidden;
+        }
+
+        private void SettingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(PageStorage.Instance.SettingsPage);
         }
 
         private bool _isAnimating = false;
@@ -106,11 +146,26 @@ namespace Sudoku.UI.Pages
 
                     switch (name)
                     {
-                        case "VitebskLevel":
+                        case "VitebskLevel_IronGift":
                             ChangeVisivleCard(VitebskCard_IronGift);
                             break;
-                        
+                        case "VitebskLevel_Theatre":
+                            ChangeVisivleCard(VitebskCard_Theatre);
+                            break;
+                        case "MogilevLevel_Theatre":
+                            ChangeVisivleCard(MogilevCard_Theatre);
+                            break;
+                        case "MogilevLevel_IronGift": // Обратите внимание на опечатку в имени (IronGif вместо IronGift)
+                            ChangeVisivleCard(MogilevCard_IronGift);
+                            break;
+                        case "GomelLevel_Home":
+                            ChangeVisivleCard(GomelCard_Home);
+                            break;
+                        case "GomelLevel_Bank":
+                            ChangeVisivleCard(GomelCard_Bank);
+                            break;
                         default:
+                            // Можно добавить логирование или обработку неизвестных уровней
                             break;
                     }
                 }
@@ -139,6 +194,12 @@ namespace Sudoku.UI.Pages
         private void ChangeVisivleCard(CardControl ctr)
         {
             Panel.SetZIndex(ctr, 3);
+            ctr.Visibility = Visibility.Visible;
+        }
+
+        private void ToAboutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Не сделано");
         }
     }
 }

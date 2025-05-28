@@ -11,22 +11,29 @@
   <ItemGroup>
     <None Remove="Resource\Card\TestInformation\testimage.png" />
     <None Remove="Resource\Card\Vitebsk\image.png" />
+    <None Remove="Resource\Icon\about.png" />
+    <None Remove="Resource\Icon\back.png" />
+    <None Remove="Resource\Icon\play.png" />
+    <None Remove="Resource\Icon\reset.png" />
+    <None Remove="Resource\Icon\settings.png" />
     <None Remove="Resource\Images\belarus-map.jpg" />
     <None Remove="Resource\Images\ccc.jpg" />
+    <None Remove="Resource\Images\map.png" />
     <None Remove="Resource\Items\chain.png" />
     <None Remove="Resource\Items\lock.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Models\" />
-    <Folder Include="Resource\Icon\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resource\Card\TestInformation\testimage.png" />
     <Resource Include="Resource\Card\Vitebsk\image.png" />
+    <Resource Include="Resource\Icon\about.png" />
+    <Resource Include="Resource\Icon\back.png" />
+    <Resource Include="Resource\Icon\play.png" />
+    <Resource Include="Resource\Icon\reset.png" />
+    <Resource Include="Resource\Icon\settings.png" />
     <Resource Include="Resource\Images\belarus-map.jpg" />
     <Resource Include="Resource\Images\ccc.jpg" />
+    <Resource Include="Resource\Images\map.png" />
     <Resource Include="Resource\Items\chain.png" />
     <Resource Include="Resource\Items\lock.png" />
   </ItemGroup>

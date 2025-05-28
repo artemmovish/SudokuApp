@@ -7,83 +7,120 @@
       xmlns:controls="clr-namespace:Sudoku.UI.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="880"
-      Title="MapPage">
+      Title="MapPage" Background="#FF1E1E1E">
     <Page.Resources>
         <Style TargetType="controls:LevelControl">
             <Setter Property="Width" Value="90"/>
             <Setter Property="Height" Value="70"/>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}">
+                            <ContentPresenter 
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid>
-        <controls:CardControl Panel.ZIndex="0" x:Name="VitebskCard_IronGift" Click="VitebskCard_Click"
+        <controls:CardControl Panel.ZIndex="0" Visibility="Hidden"
+                              x:Name="VitebskCard_IronGift" Click="CardClose_Click"
                               ImageSource="/Resource/Card/Vitebsk/image.jpg"
                               VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
                               Title="Железнодорожный вокзал станции Витебск"
                               Information="Железнодорожный вокзал станции Витебск расположен в одноименном городе на Привокзальной площади. Адрес — улица Космонавтов, 8.
 Нынешнее здание вокзала построено в 1952 году. Архитектор — Борис Мезенцев. Двухэтажное здание в стиле советского неоклассицизма. Он состоит из прямоугольного центрального и двух боковых объёмов. Главный фасад центрального здания отличается тремя широкими арочными оконными проемами и украшен коринфскими колоннами, лепными прямоугольными нишами, барельефами. Посередине главного фасада установлены часы."/>
-        <controls:CardControl Panel.ZIndex="0" x:Name="VitebskCard_Theatre" Click="VitebskCard_Click"
+        <controls:CardControl Panel.ZIndex="0" Visibility="Hidden"
+                              x:Name="VitebskCard_Theatre" Click="CardClose_Click"
                               ImageSource="/Resource/Card/Vitebsk/image.jpg"
                               VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
                               Title="театр якуба колоса"
                               Information="театр якуба колоса"/>
-        <controls:CardControl Panel.ZIndex="0" x:Name="MogilevCard_Theatre" Click="VitebskCard_Click"
+        <controls:CardControl Panel.ZIndex="0" Visibility="Hidden"
+                              x:Name="MogilevCard_Theatre" Click="CardClose_Click"
       ImageSource="/Resource/Card/Vitebsk/image.jpg"
       VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
       Title="городской театр"
       Information="городской театр"/>
-        <controls:CardControl Panel.ZIndex="0" x:Name="MogilevCard_IronGift" Click="VitebskCard_Click"
+        <controls:CardControl Panel.ZIndex="0" Visibility="Hidden"
+                              x:Name="MogilevCard_IronGift" Click="CardClose_Click"
       ImageSource="/Resource/Card/Vitebsk/image.jpg"
       VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
       Title="жд вокзал"
       Information="жд вокзал"/>
-        <controls:CardControl Panel.ZIndex="0" x:Name="GomelCard_Home" Click="VitebskCard_Click"
+        <controls:CardControl Panel.ZIndex="0" Visibility="Hidden"
+                              x:Name="GomelCard_Home" Click="CardClose_Click"
 ImageSource="/Resource/Card/Vitebsk/image.jpg"
 VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
 Title="Дом врача Александрова"
 Information="Дом врача Александрова"/>
-        <controls:CardControl Panel.ZIndex="0" x:Name="GomelCard_Bank" Click="CardClose_Click"
+        <controls:CardControl Panel.ZIndex="0" Visibility="Hidden"
+                              x:Name="GomelCard_Bank" Click="CardClose_Click"
 ImageSource="/Resource/Card/Vitebsk/image.jpg"
 VideoSource="E:\Project\Учебный процесс\КПиЯП\Cursach\SudokuApp\Sudoku\Resource\Card\Vitebsk\video.mp4"
 Title="орловский коммерческий банк"
 Information="орловский коммерческий банк"/>
         <!-- Фон карты Беларуси -->
-        <Image Source="/Resource/Images/belarus-map.jpg"
-               Margin="-130"
+        <Image Source="/Resource/Images/map.png"
+               Margin="-25"
                Stretch="Uniform"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
         <!-- Контейнер для уровней (UserControl) -->
         <Canvas x:Name="LevelsContainer">
-            <controls:LevelControl x:Name="VitebskLevel_IronGift"  Click="Level_Click"
-                                   LockCount="1"
-                                   TaskType="Sudoku"
-                                   Canvas.Left="557"
-                                   Canvas.Top="132"/>
-            <controls:LevelControl x:Name="VitebskLevel_Theatre"  Click="Level_Click"
-           LockCount="1"
-           TaskType="Sudoku"
-           Canvas.Left="409"
-           Canvas.Top="167"/>
+            <!-- Витебск -->
+            <controls:LevelControl x:Name="VitebskLevel_IronGift" Click="Level_Click"
+                           UnlockLevelCount="0"  
+                           LockCount="3"
+                           TaskType="Sudoku"
+                           Canvas.Left="540"
+                           Canvas.Top="132" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-            <controls:LevelControl x:Name="MogilevLevel_Theatre"  Click="Level_Click"
-                                  Canvas.Left="585"
-                                  Canvas.Top="300" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <controls:LevelControl x:Name="MogilevLevel_IronGif"  Click="Level_Click"
-                      Canvas.Left="512"
-                      Canvas.Top="350" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
+            <controls:LevelControl x:Name="VitebskLevel_Theatre" Click="Level_Click"
+                           UnlockLevelCount="0"  
+                           LockCount="2"
+                           TaskType="Nonogram"
+                           Canvas.Left="395"
+                           Canvas.Top="97"/>
+            
+            <!-- Могилев -->
+            <controls:LevelControl x:Name="MogilevLevel_Theatre" Click="Level_Click"
+                           UnlockLevelCount="2" 
+                           LockCount="3"
+                           TaskType="Sudoku"
+                           Canvas.Left="649"
+                           Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            
+            <controls:LevelControl x:Name="MogilevLevel_IronGift" Click="Level_Click"
+                           UnlockLevelCount="5"  
+                           LockCount="2"
+                           TaskType="Nonogram"
+                           Canvas.Left="559"
+                           Canvas.Top="350" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <!-- Гомель -->
             <controls:LevelControl x:Name="GomelLevel_Home" Click="Level_Click"
-                       LockCount="2"
-                       TaskType="Sudoku"
-                       Canvas.Left="585"
-                       Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <controls:LevelControl x:Name="GomelLevel_Bank" Click="Level_Click"
-           LockCount="2"
-           TaskType="Sudoku"
-           Canvas.Left="479"
-           Canvas.Top="511" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                           UnlockLevelCount="8"  
+                           LockCount="3"
+                           TaskType="Sudoku"
+                           Canvas.Left="585"
+                           Canvas.Top="480" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+            <controls:LevelControl x:Name="GomelLevel_Bank" Click="Level_Click"
+                           UnlockLevelCount="11"
+                           LockCount="2"
+                           TaskType="Nonogram"
+                           Canvas.Left="440"
+                           Canvas.Top="546" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Canvas>
         <!-- Панель информации (справа) -->
         <Border Width="250"
@@ -110,15 +147,35 @@ Information="орловский коммерческий банк"/>
                            TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
-        <!-- Кнопка "Назад" -->
-        <Button Content="Назад" x:Name="ToBackBtn"
+        
+        <Button x:Name="ToBackBtn"
                 Click="ToBackBtn_Click"
-                Width="80"
-                Height="30"
+                Height="50"
+                Background="Transparent" BorderBrush="Transparent"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="10">
+            <Image Source="/Resource/Icon/back.png"/>
+        </Button>
+
+        <Button x:Name="ToAboutBtn"
+        Click="ToAboutBtn_Click"
+        Height="50"
+        Background="Transparent" BorderBrush="Transparent"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Margin="10">
+            <Image Source="/Resource/Icon/about.png"/>
+        </Button>
+        
+        <Button x:Name="ToSettingBtn"
+                Click="SettingBtn_Click"
+                Height="50"
+                Background="Transparent" BorderBrush="Transparent"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="10"
-                Background="#3A3A3A"
-                Foreground="White"/>
+                Margin="60,10,10,10">
+            <Image Source="/Resource/Icon/settings.png"/>
+        </Button>
     </Grid>
 </Page>
