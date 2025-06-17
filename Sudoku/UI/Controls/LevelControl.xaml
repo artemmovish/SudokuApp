@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Фоновое изображение (растягивается на весь контрол) -->
-        <Image  Source="/Resource/Card/Vitebsk/image.png" Stretch="Uniform" Grid.RowSpan="3"/>
+        <Image x:Name="ImageSource" Stretch="Uniform" Grid.RowSpan="3"/>
 
         <!-- Контейнер для замков (центрируется) -->
         <Viewbox Stretch="Uniform" MaxWidth="800" Grid.Row="1" Panel.ZIndex="3"

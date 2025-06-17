@@ -119,7 +119,14 @@ namespace Sudoku.UI.Controls
             }
             else
             {
-                MessageBox.Show("Пока нет");
+                //MessageBox.Show("Пока нет");
+
+                var window = new MonogramLevelWindow();
+
+                if (window.ShowDialog() == true)
+                {
+                    LevelIsCompleted(clickedLock);
+                }
             }
             
         }
@@ -141,6 +148,25 @@ namespace Sudoku.UI.Controls
             {
                 Chain.Visibility = Visibility.Collapsed;
                 IsComplete = true;
+            }
+        }
+
+        public static readonly DependencyProperty ImageSourceProperty =
+    DependencyProperty.Register("ImageSourcePath", typeof(string), typeof(LevelControl),
+    new PropertyMetadata(string.Empty, OnImageSourceChanged));
+
+        public string ImageSourcePath
+        {
+            get { return (string)GetValue(ImageSourceProperty); }
+            set { SetValue(ImageSourceProperty, value); }
+        }
+
+        private static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as LevelControl;
+            if (control != null && e.NewValue is string path && !string.IsNullOrEmpty(path))
+            {
+                control.ImageSource.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
             }
         }
 

@@ -19,6 +19,8 @@ namespace Sudoku.Core.ViewModels.SinglTone
         public int Difficulty { get; set; }
         public int OpenLockCount { get; set; }
 
+        public int OpenMonogram { get; set; }
+
         public List<CompletedLevel> CompletedLevels { get; set; }
 
         public static PageStorage Instance
@@ -87,9 +89,26 @@ namespace Sudoku.Core.ViewModels.SinglTone
                 NewSave(filePath);
             }
 
+            filePath = Path.Combine("Saves", "completed_monogram.txt");
+
+            if (File.Exists(filePath))
+            {
+                string content = File.ReadAllText(filePath);
+                if (int.TryParse(content, out int savedMonogram))
+                {
+                    PageStorage.Instance.OpenMonogram = savedMonogram;
+                }
+                else
+                {
+                    // Обработка случая, когда в файле не число
+                    Console.WriteLine("Файл содержит некорректные данные");
+                    PageStorage.Instance.OpenMonogram = 0; // Значение по умолчанию
+                }
+            }
             Difficulty = 50;
             SettingsPage = new SettingsPage();
             OpenLockCount = 0;
+
 
             MapPage = new MapPage();
         }

@@ -45,6 +45,11 @@ public partial class MainWindow : Window
         // Теперь записываем файл
         File.WriteAllText(filePath, json);
 
+        filePath = System.IO.Path.Combine("Saves", "completed_monogram.txt");
+
+        File.WriteAllText(filePath, PageStorage.Instance.OpenMonogram.ToString());
+
+
         //MessageBox.Show(json);
     }
 }

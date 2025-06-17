@@ -9,8 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\Card\Gomel\банк.png" />
+    <None Remove="Resource\Card\Gomel\врач.png" />
+    <None Remove="Resource\Card\Gomel\домврача.png" />
+    <None Remove="Resource\Card\Gomel\орловскийбанк.png" />
+    <None Remove="Resource\Card\Mogilev\драмтеатр.png" />
+    <None Remove="Resource\Card\Mogilev\жд.png" />
+    <None Remove="Resource\Card\Mogilev\ждвокзалмогилев.png" />
+    <None Remove="Resource\Card\Mogilev\театр.png" />
     <None Remove="Resource\Card\TestInformation\testimage.png" />
-    <None Remove="Resource\Card\Vitebsk\image.png" />
+    <None Remove="Resource\Card\Vitebsk\жд.png" />
+    <None Remove="Resource\Card\Vitebsk\ждвокзалвитебск.png" />
+    <None Remove="Resource\Card\Vitebsk\театр.png" />
+    <None Remove="Resource\Card\Vitebsk\театрякубаколоса.png" />
     <None Remove="Resource\Icon\about.png" />
     <None Remove="Resource\Icon\back.png" />
     <None Remove="Resource\Icon\play.png" />
@@ -24,8 +35,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Card\Gomel\банк.png" />
+    <Resource Include="Resource\Card\Gomel\врач.png" />
+    <Resource Include="Resource\Card\Gomel\домврача.png" />
+    <Resource Include="Resource\Card\Gomel\орловскийбанк.png" />
+    <Resource Include="Resource\Card\Mogilev\драмтеатр.png" />
+    <Resource Include="Resource\Card\Mogilev\жд.png" />
+    <Resource Include="Resource\Card\Mogilev\ждвокзалмогилев.png" />
+    <Resource Include="Resource\Card\Mogilev\театр.png" />
     <Resource Include="Resource\Card\TestInformation\testimage.png" />
-    <Resource Include="Resource\Card\Vitebsk\image.png" />
+    <Resource Include="Resource\Card\Vitebsk\жд.png" />
+    <Resource Include="Resource\Card\Vitebsk\ждвокзалвитебск.png" />
+    <Resource Include="Resource\Card\Vitebsk\театр.png" />
+    <Resource Include="Resource\Card\Vitebsk\театрякубаколоса.png" />
     <Resource Include="Resource\Icon\about.png" />
     <Resource Include="Resource\Icon\back.png" />
     <Resource Include="Resource\Icon\play.png" />
