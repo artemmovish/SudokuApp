@@ -96,13 +96,13 @@ namespace Sudoku.Core.ViewModels.SinglTone
                 string content = File.ReadAllText(filePath);
                 if (int.TryParse(content, out int savedMonogram))
                 {
-                    PageStorage.Instance.OpenMonogram = savedMonogram;
+                    OpenMonogram = savedMonogram;
                 }
                 else
                 {
                     // Обработка случая, когда в файле не число
                     Console.WriteLine("Файл содержит некорректные данные");
-                    PageStorage.Instance.OpenMonogram = 0; // Значение по умолчанию
+                    OpenMonogram = 0; // Значение по умолчанию
                 }
             }
             Difficulty = 50;

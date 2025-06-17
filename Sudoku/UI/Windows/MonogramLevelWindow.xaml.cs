@@ -285,8 +285,8 @@ namespace Sudoku.UI.Windows
         {
             if (CompareMatricesFast(_currentMatrix, _currentLevel))
             {
-                MessageBox.Show("Решено");
-                this.Close();
+                MessageBox.Show("Поздравляем! Ваше решение верное!");
+                this.DialogResult = true;
             }
             else
             {
