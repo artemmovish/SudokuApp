@@ -121,7 +121,7 @@ namespace Sudoku.UI.Windows
                     int row = flatIndex / 15;
                     int col = flatIndex % 15;
                     _currentMatrix[row][col] = !_currentMatrix[row][col];
-                    button.Background = _currentMatrix[row][col] ? Brushes.Black : Brushes.Red;
+                    button.Background = _currentMatrix[row][col] ? Brushes.Black : Brushes.Wheat;
                 }
             }
         }
@@ -189,11 +189,11 @@ namespace Sudoku.UI.Windows
         public ObservableCollection<ObservableCollection<bool>> Level2 = new ObservableCollection<ObservableCollection<bool>>()
 {
     new ObservableCollection<bool>() { false, false, false, false, false, false, false, false, false, false, false, false, false, false, true },
-    new ObservableCollection<bool>() { false, false, false, false, false, false, false, false, false, false, true, true, false, false, false }, // Добавлен недостающий false
+    new ObservableCollection<bool>() { false, false, false, false, false, false, false, false, false, false, false, true, true, false, false }, // Добавлен недостающий false
     new ObservableCollection<bool>() { false, false, false, false, true, false, false, false, false, false, false, false, false, false, false },
     new ObservableCollection<bool>() { false, false, false, false, true, true, false, false, false, true, true, false, false, false, false },
     new ObservableCollection<bool>() { false, false, false, false, true, false, false, false, false, true, true, false, false, false, false },
-    new ObservableCollection<bool>() { false, false, false, true, true, true, true, true, true, true, true, true, true, true, true },
+    new ObservableCollection<bool>() { false, false, false, true, true, true, true, true, true, true, true, true, false, false, false },
     new ObservableCollection<bool>() { false, false, true, true, true, true, true, false, true, false, true, false, true, false, false },
     new ObservableCollection<bool>() { false, true, true, true, true, true, true, true, false, true, false, true, false, true, false },
     new ObservableCollection<bool>() { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true },
@@ -286,6 +286,7 @@ namespace Sudoku.UI.Windows
             if (CompareMatricesFast(_currentMatrix, _currentLevel))
             {
                 MessageBox.Show("Поздравляем! Ваше решение верное!");
+                PageStorage.Instance.OpenMonogram++;
                 this.DialogResult = true;
             }
             else
@@ -293,6 +294,39 @@ namespace Sudoku.UI.Windows
                 MessageBox.Show("Неверно");
             }
 
+        }
+
+        private void Button_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            // Проверяем, что зажат Ctrl (левый или правый)
+            bool isCtrlPressed = (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+
+            if (sender is Button button && isCtrlPressed)
+            {
+                // Получаем индекс через ItemsControl
+                int flatIndex = MatrixItemsControl.ItemContainerGenerator.IndexFromContainer(button);
+
+                // Если не получилось через генератор, ищем вручную
+                if (flatIndex == -1)
+                {
+                    flatIndex = FindButtonIndex(button);
+                }
+
+                if (flatIndex >= 0)
+                {
+                    int row = flatIndex / 15;
+                    int col = flatIndex % 15;
+
+                    _currentMatrix[row][col] = !_currentMatrix[row][col];
+
+                    button.Background = _currentMatrix[row][col] ? Brushes.Black : Brushes.Wheat;
+                }
+            }
         }
     }
 

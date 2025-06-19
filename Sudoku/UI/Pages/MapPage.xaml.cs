@@ -2,6 +2,7 @@
 using Sudoku.UI.Controls;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml.Linq;
 
 namespace Sudoku.UI.Pages
@@ -62,6 +64,10 @@ namespace Sudoku.UI.Pages
                         break;
                 }
             }
+
+            StartPeriodicCheck();
+
+            CheckLevelVisible();
         }
 
         private void ToBackBtn_Click(object sender, RoutedEventArgs e)
@@ -109,8 +115,11 @@ namespace Sudoku.UI.Pages
             }
             finally
             {
+                CheckLevelVisible();
                 _isAnimating = false;
             }
+
+            CheckLevelVisible();
         }
 
         private async Task ChangeSize(LevelControl ctr, CancellationToken cancellationToken)
@@ -195,11 +204,106 @@ namespace Sudoku.UI.Pages
         {
             Panel.SetZIndex(ctr, 3);
             ctr.Visibility = Visibility.Visible;
+
+            CheckLevelVisible();
         }
 
         private void ToAboutBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Не сделано");
+        }
+
+        public void CheckLevelVisible()
+        {
+            int openLockCount = PageStorage.Instance.OpenLockCount;
+
+            // Всегда сбрасываем видимость (если нужно)
+            MogilevLevel_Theatre.Visibility = Visibility.Collapsed;
+            MogilevLevel_IronGift.Visibility = Visibility.Collapsed;
+            GomelLevel_Home.Visibility = Visibility.Collapsed;
+            GomelLevel_Bank.Visibility = Visibility.Collapsed;
+
+            // Устанавливаем видимость в зависимости от OpenLockCount
+            if (openLockCount >= 3)
+            {
+                ChangeImageSourceFromResources("/Resource/Map/level2.png");
+                MogilevLevel_Theatre.Visibility = Visibility.Visible;
+            }
+            if (openLockCount >= 3)
+            {
+                MogilevLevel_IronGift.Visibility = Visibility.Visible;
+            }
+            if (openLockCount >= 6)
+            {
+                ChangeImageSourceFromResources("/Resource/Map/level3.png"); // Если нужно другое изображение, замени путь
+                GomelLevel_Home.Visibility = Visibility.Visible;
+            }
+            if (openLockCount >= 6)
+            {
+                GomelLevel_Bank.Visibility = Visibility.Visible;
+            }
+        }
+
+        public void ChangeImageSourceFromResources(string resourcePath)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(resourcePath, UriKind.Relative);
+            bitmap.EndInit();
+
+            MapImage.Source = bitmap;
+        }
+
+        public void ChangeImageSource(string imagePath)
+        {
+            if (File.Exists(imagePath))
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath, UriKind.RelativeOrAbsolute);
+                bitmap.EndInit();
+
+                MapImage.Source = bitmap;
+            }
+            else
+            {
+                // Обработка случая, когда файл не найден
+                MapImage.Source = null; // или установить изображение по умолчанию
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            CheckLevelVisible();
+        }
+
+
+        private DispatcherTimer _timer;
+
+        public void StartPeriodicCheck()
+        {
+            // Создаем таймер с интервалом 3 секунд
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Этот метод вызывается каждые 5 секунд
+            CheckLevelVisible(); // Вызываем твой метод
+                                 // Можно добавить другие действия
+        }
+
+        public void StopPeriodicCheck()
+        {
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer.Tick -= Timer_Tick;
+                _timer = null;
+            }
         }
     }
 }

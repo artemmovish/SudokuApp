@@ -1,4 +1,5 @@
-﻿using Sudoku.Core.ViewModels.SinglTone;
+﻿using Sudoku.Core.Services;
+using Sudoku.Core.ViewModels.SinglTone;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,11 @@ namespace Sudoku.UI.Pages
     /// </summary>
     public partial class SettingsPage : Page
     {
+        MusicPlayer MusicPlayer = new();
         public SettingsPage()
         {
             InitializeComponent();
+            
         }
 
         private void ToBackBtn_Click(object sender, RoutedEventArgs e)
@@ -31,6 +34,16 @@ namespace Sudoku.UI.Pages
             var dif = (int)DifficultySlider.Value;
             PageStorage.Instance.Difficulty = (int) (50.0 / 100 * dif);
             NavigationService?.GoBack();
+        }
+
+        private void SoundToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            MusicPlayer.Play("");
+        }
+
+        private void SoundToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            MusicPlayer.Stop();
         }
     }
 }

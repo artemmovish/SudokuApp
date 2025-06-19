@@ -31,6 +31,8 @@
     </Page.Resources>
     
     <Grid>
+        <Image Source="/Resource/Images/background.jpg" Stretch="UniformToFill"/>
+
         <!-- Основной контейнер -->
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
 
@@ -72,6 +74,8 @@
                            Margin="0,0,10,0"/>
 
                 <ToggleButton x:Name="SoundToggle"
+                              Checked="SoundToggle_Checked"
+                              Unchecked="SoundToggle_Unchecked"
                               Width="60"
                               Height="30"
                               IsChecked="True"

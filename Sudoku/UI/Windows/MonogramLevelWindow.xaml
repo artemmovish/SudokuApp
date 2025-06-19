@@ -18,7 +18,7 @@
             <Grid>
                 <Button Content="Проверить" Click="ButtonAnswer_Click" VerticalAlignment="Bottom" Panel.ZIndex="13" HorizontalAlignment="Right" Width="100" Height="40"/>
                 <Image Source="{Binding CurrentImage}" x:Name="CurrentImage"/>
-                <Grid x:Name="MainGrid" Background="Transparent" Panel.ZIndex="12" Width="740" Height="740">
+                <Grid x:Name="MainGrid" Background="Gray" Panel.ZIndex="12" Width="740" Height="740">
                     <ItemsControl x:Name="MatrixItemsControl">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -32,7 +32,8 @@
                 Height="40" 
                 Margin="2"
                 Click="CellButton_Click"
-                Tag="{Binding}" Background="Red"/>
+                                    MouseEnter="Button_MouseEnter"
+                Tag="{Binding}" Background="Wheat"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

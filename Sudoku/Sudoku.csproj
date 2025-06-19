@@ -27,11 +27,15 @@
     <None Remove="Resource\Icon\play.png" />
     <None Remove="Resource\Icon\reset.png" />
     <None Remove="Resource\Icon\settings.png" />
+    <None Remove="Resource\Images\background.jpg" />
     <None Remove="Resource\Images\belarus-map.jpg" />
     <None Remove="Resource\Images\ccc.jpg" />
     <None Remove="Resource\Images\map.png" />
     <None Remove="Resource\Items\chain.png" />
     <None Remove="Resource\Items\lock.png" />
+    <None Remove="Resource\Map\level1.png" />
+    <None Remove="Resource\Map\level2.png" />
+    <None Remove="Resource\Map\level3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,11 +61,15 @@
     <Resource Include="Resource\Icon\play.png" />
     <Resource Include="Resource\Icon\reset.png" />
     <Resource Include="Resource\Icon\settings.png" />
+    <Resource Include="Resource\Images\background.jpg" />
     <Resource Include="Resource\Images\belarus-map.jpg" />
     <Resource Include="Resource\Images\ccc.jpg" />
     <Resource Include="Resource\Images\map.png" />
     <Resource Include="Resource\Items\chain.png" />
     <Resource Include="Resource\Items\lock.png" />
+    <Resource Include="Resource\Map\level1.png" />
+    <Resource Include="Resource\Map\level2.png" />
+    <Resource Include="Resource\Map\level3.png" />
   </ItemGroup>
 
   <ItemGroup>

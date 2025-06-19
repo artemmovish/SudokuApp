@@ -7,7 +7,8 @@
       xmlns:controls="clr-namespace:Sudoku.UI.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="880"
-      Title="MapPage" Background="#FF1E1E1E">
+      Title="MapPage" Background="#FF1E1E1E"
+      Loaded="Page_Loaded">
     <Page.Resources>
         <Style TargetType="controls:LevelControl">
             <Setter Property="Width" Value="90"/>
@@ -105,12 +106,15 @@ Information="Орловский коммерческий банк — один �
 В 1903 году на углу улиц Румянцевской и Ирининской (ныне – Советская и Ирининская) было возведено двухэтажное здание Орловского коммерческого банка, который стал вторым крупным сооружением, построенным по проекту С. Шабуневского в Гомеле. Эффектное угловое здание в стиле модерн завершалось башенкой с высоким куполом.
 После Великой Отечественной войны здание восстановили, достроив ещё один этаж, сохранив при этом конструктивные особенности и узнаваемый вид здания.
 "/>
+        <Image Source="/Resource/Images/background.jpg" Stretch="UniformToFill"/>
+
         <!-- Фон карты Беларуси -->
-        <Image Source="/Resource/Images/map.png"
+        <Image Source="/Resource/Map/level1.png"
                Margin="-25"
                Stretch="Uniform"
                HorizontalAlignment="Center"
-               VerticalAlignment="Center"/>
+               VerticalAlignment="Center"
+               x:Name="MapImage"/>
         <!-- Контейнер для уровней (UserControl) -->
         <Canvas x:Name="LevelsContainer">
             <!-- Витебск -->
@@ -129,39 +133,39 @@ Information="Орловский коммерческий банк — один �
                            TaskType="Nonogram"
                            Canvas.Left="395"
                            Canvas.Top="97"/>
-            
+
             <!-- Могилев -->
-            <controls:LevelControl x:Name="MogilevLevel_Theatre" Click="Level_Click"
+            <controls:LevelControl x:Name="MogilevLevel_Theatre" Click="Level_Click" Visibility="Collapsed"
                                    ImageSourcePath="/Resource/Card/Mogilev/театр.png"
-                           UnlockLevelCount="2" 
+                           UnlockLevelCount="3" 
                            LockCount="3"
                            TaskType="Sudoku"
-                           Canvas.Left="649"
-                           Canvas.Top="280" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            
-            <controls:LevelControl x:Name="MogilevLevel_IronGift" Click="Level_Click"
+                           Canvas.Left="630"
+                           Canvas.Top="296" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <controls:LevelControl x:Name="MogilevLevel_IronGift" Click="Level_Click" Visibility="Collapsed"
                                    ImageSourcePath="/Resource/Card/Mogilev/жд.png"
-                           UnlockLevelCount="5"  
+                           UnlockLevelCount="3"  
                            LockCount="2"
                            TaskType="Nonogram"
-                           Canvas.Left="559"
-                           Canvas.Top="350" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                           Canvas.Left="518"
+                           Canvas.Top="327" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <!-- Гомель -->
-            <controls:LevelControl x:Name="GomelLevel_Home" Click="Level_Click"
+            <controls:LevelControl x:Name="GomelLevel_Home" Click="Level_Click" Visibility="Collapsed"
                                    ImageSourcePath="/Resource/Card/Gomel/врач.png"
-                           UnlockLevelCount="8"  
+                           UnlockLevelCount="6"  
                            LockCount="3"
                            TaskType="Sudoku"
-                           Canvas.Left="585"
-                           Canvas.Top="480" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                           Canvas.Left="569"
+                           Canvas.Top="459" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-            <controls:LevelControl x:Name="GomelLevel_Bank" Click="Level_Click"
+            <controls:LevelControl x:Name="GomelLevel_Bank" Click="Level_Click" Visibility="Collapsed"
                                    ImageSourcePath="/Resource/Card/Gomel/банк.png"
-                           UnlockLevelCount="11"
+                           UnlockLevelCount="6"
                            LockCount="2"
                            TaskType="Nonogram"
                            Canvas.Left="440"
-                           Canvas.Top="546" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                           Canvas.Top="515" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
         <!-- Панель информации (справа) -->
         <Border Width="250"
@@ -188,7 +192,7 @@ Information="Орловский коммерческий банк — один �
                            TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
-        
+
         <Button x:Name="ToBackBtn"
                 Click="ToBackBtn_Click"
                 Height="50"
@@ -208,7 +212,7 @@ Information="Орловский коммерческий банк — один �
         Margin="10">
             <Image Source="/Resource/Icon/about.png"/>
         </Button>
-        
+
         <Button x:Name="ToSettingBtn"
                 Click="SettingBtn_Click"
                 Height="50"

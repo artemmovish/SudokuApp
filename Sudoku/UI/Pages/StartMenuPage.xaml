@@ -31,6 +31,7 @@
     </Page.Resources>
     
     <Grid>
+        <Image Source="/Resource/Images/background.jpg" Stretch="UniformToFill"/>
         <Button x:Name="ToBackBtn"  Style="{StaticResource btn}"
         Click="ToBackBtn_Click"
         Height="50"

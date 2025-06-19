@@ -89,6 +89,21 @@ namespace Sudoku.Core.ViewModels.SinglTone
                 NewSave(filePath);
             }
 
+            OpenLockCount = 0;
+            int count = 1;
+            foreach (var item in CompletedLevels)
+            {
+                if (count % 2 == 0)
+                {
+                    OpenLockCount += 2 - item.CountLock;
+                }
+                else
+                {
+                    OpenLockCount += 3 - item.CountLock;
+                }
+                count++;
+            }
+
             filePath = Path.Combine("Saves", "completed_monogram.txt");
 
             if (File.Exists(filePath))
@@ -107,7 +122,6 @@ namespace Sudoku.Core.ViewModels.SinglTone
             }
             Difficulty = 50;
             SettingsPage = new SettingsPage();
-            OpenLockCount = 0;
 
 
             MapPage = new MapPage();
